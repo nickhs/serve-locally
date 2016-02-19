@@ -1,0 +1,26 @@
+{
+  "name": "serve-locally",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --reporter spec --bail --check-leaks test/",
+    "test-cov": "istanbul cover node_modules/mocha/bin/_mocha -- --reporter dot --check-leaks test/",
+    "test-travis": "istanbul cover node_modules/mocha/bin/_mocha --report lcovonly -- --reporter spec --check-leaks test/"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "express": "^4.13.4",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.4.5",
+    "sinon": "^1.17.3"
+  },
+  "dependencies": {
+    "bluebird": "^3.3.1"
+  }
+}
