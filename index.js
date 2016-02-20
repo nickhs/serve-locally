@@ -135,8 +135,19 @@ function locateFilePath(path, queryParams, opts) {
         return f.nameStripped == path[path.length - 1];
     });
 
+    // these all match on names - if we have a query param
+    // we need to try and fuzzy match on that.
+    potentialMatches = potentialMatches.map((m) => {
+        return {
+            'item': m,
+            'count': fuzzyEqual(queryParams, m.query)
+        };
+    })
+    .filter((m) => m.count != -1)
+    .sort((a, b) => a.count < b.count);
+
     if (potentialMatches.length > 0) {
-        return pathLib.format(potentialMatches[0]);
+        return pathLib.format(potentialMatches[0].item);
     }
 }
 
@@ -172,4 +183,41 @@ function parseFilename(filename) {
     // parse the query string
     ret.query = querystring.parse(queryString);
     return ret;
+}
+
+/**
+ * Does a single level match between A and B
+ * where it retuns a count is the number of keys that
+ * matched.
+ *
+ * Returns -1 on no match.
+ */
+function fuzzyEqual(actual, matching) {
+    let matchCount = 0;
+
+    if (!actual) { // no query params
+        if (!matching || Object.keys(matching) == 0) return 0;
+        return -1;
+    }
+
+    for (let key in actual) {
+        let matchingValue = matching[key];
+
+        if (!matchingValue) continue; // does that key exist in the actual?
+
+        // does the value in matching match that in actual?
+        if (matchingValue != actual[key]) {
+            return -1;
+        }
+
+        matchCount += 1;
+    }
+
+    // prefer the shortest item
+    if (matchCount > 0 && Object.keys(matching).length > Object.keys(actual).length) {
+        let temp = matchCount - (Object.keys(matching).length - Object.keys(actual).length);
+        matchCount = Math.max(temp, 0.5);
+    }
+
+    return matchCount;
 }

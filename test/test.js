@@ -24,4 +24,10 @@ describe('serveLocally()', () => {
         let data = instance({path: '/path1/path2/resource', query: null}, {json: spy});
         // FIXME actually test this
     });
+
+    it('should handle query params', () => {
+        let opts = {root: './test/test_dirs'};
+        let path = serveLocally.locateFilePath('/path1/path2/resource', {'foo': 'bar'}, opts);
+        expect(path).to.be.equal('test/test_dirs/path1/path2/resource?foo=bar.json');
+    });
 });
