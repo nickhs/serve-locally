@@ -64,7 +64,10 @@ function serveLocally(opts) {
     if (!opts) opts = {};
 
     return function serveLocally(req, res, next) {
-        let filePath = locateFilePath(req.path, req.query, opts);
+        let filePath;
+        try {
+            filePath = locateFilePath(req.path, req.query, opts);
+        } catch(err) {}
 
         // if we got a file path back load that sucker up
         if (!filePath) {

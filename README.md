@@ -13,6 +13,8 @@ Responds with the JSON response in matching file.
 $ npm install serve-locally
 ```
 
+Uses ES6 features and requires NodeJS 5.6.x and above.
+
 ## Example
 
 Refer to the [test/server.js][serverjs] and matching directories.
@@ -34,7 +36,6 @@ app.use(serveLocally({'root': './sample_responses'}));
 ### Resolution Logic
 
 Refer to the documentation in [index.js][indexjs] for the resolution logic and caveats.
-
 
 [serverjs]: https://github.com/nickhs/serve-locally/blob/master/test/server.js
 [indexjs]: https://github.com/nickhs/serve-locally/blob/master/index.js
