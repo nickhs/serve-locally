@@ -3,9 +3,9 @@
 Express middleware.
 
 When defined, takes requests and checks the configured root folder for matching JSON responses
-based on the path given and file path.
+based on the url path and files/folders in the root folder.
 
-Responds with the JSON response in matching files.
+Responds with the JSON response in matching file.
 
 ## Installation
 
@@ -16,7 +16,6 @@ $ npm install serve-locally
 ## Example
 
 Refer to the [test/server.js][server.js] and matching directories.
-
 
 ## API
 
