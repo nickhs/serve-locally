@@ -15,7 +15,7 @@ $ npm install serve-locally
 
 ## Example
 
-Refer to the [test/server.js][server.js] and matching directories.
+Refer to the [test/server.js][serverjs] and matching directories.
 
 ## API
 
@@ -33,8 +33,8 @@ app.use(serveLocally({'root': './sample_responses'}));
 
 ### Resolution Logic
 
-Refer to the documentation in [index.js][index.js] for the resolution logic and caveats.
+Refer to the documentation in [index.js][indexjs] for the resolution logic and caveats.
 
 
-[server.js]: "https://github.com/nickhs/serve-locally/blob/master/test/server.js"
-[index.js]: "https://github.com/nickhs/serve-locally/blob/master/index.js"
+[serverjs]: https://github.com/nickhs/serve-locally/blob/master/test/server.js
+[indexjs]: https://github.com/nickhs/serve-locally/blob/master/index.js
