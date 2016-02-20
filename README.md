@@ -1,4 +1,5 @@
 # serve-locally
+[![Build Status](https://travis-ci.org/nickhs/serve-locally.svg?branch=master)](https://travis-ci.org/nickhs/serve-locally)
 
 Express middleware.
 
@@ -36,6 +37,10 @@ app.use(serveLocally({'root': './sample_responses'}));
 ### Resolution Logic
 
 Refer to the documentation in [index.js][indexjs] for the resolution logic and caveats.
+
+### LICENSE
+
+MIT
 
 [serverjs]: https://github.com/nickhs/serve-locally/blob/master/test/server.js
 [indexjs]: https://github.com/nickhs/serve-locally/blob/master/index.js
