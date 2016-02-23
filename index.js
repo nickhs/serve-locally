@@ -60,20 +60,36 @@ const fs = require('fs');
 module.exports = serveLocally;
 module.exports.locateFilePath = locateFilePath;
 
+let logger = () => {};
+
 function serveLocally(opts) {
     if (!opts) opts = {};
+
+    if (typeof opts.logger == 'function') {
+        logger = opts.logger;
+    } else if (opts.logger == true) {
+        logger = console.logj
+    }
+
+    let root = '.';
+
+    if (opts.root) {
+        root = opts.root;
+    }
 
     return function serveLocally(req, res, next) {
         let filePath;
         try {
-            filePath = locateFilePath(req.path, req.query, opts);
+            filePath = locateFilePath(req.path, req.query, root);
         } catch(err) {}
 
-        // if we got a file path back load that sucker up
         if (!filePath) {
+            logger("Could not find match for",
+                   pathLib.resolve(pathLib.join(root, req.path)));
             return next();
         }
 
+        // if we got a file path back load that sucker up
         fs.readFile(filePath, 'utf8', (err, data) => {
             if (err) {
                 return next();
@@ -82,21 +98,17 @@ function serveLocally(opts) {
             try {
                 data = JSON.parse(data);
             } catch (err) {
+                logger("Could not parse json from", filePath, err);
                 return next();
             }
 
+            logger("Responding with data from", filePath);
             res.json(data);
         });
     }
 };
 
-function locateFilePath(path, queryParams, opts) {
-    let root = '.';
-
-    if (opts.root) {
-        root = opts.root;
-    }
-
+function locateFilePath(path, queryParams, root) {
     // strip the first /
     if (path[0] == '/') {
         path = path.substring(1, path.length);

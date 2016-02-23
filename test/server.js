@@ -3,7 +3,7 @@ const serveLocally = require('../index.js');
 const app = new (require('express'))();
 const port = 3000;
 
-app.use('/api', serveLocally({root: 'test_dirs'}));
+app.use('/api', serveLocally({root: 'test_dirs', logger: true}));
 
 app.all('/', (req, res) => {
     res.send('ok');

@@ -14,7 +14,7 @@ describe('serveLocally()', () => {
 
     it('should find simple local paths', () => {
         let opts = {root: './test/test_dirs'};
-        let path = serveLocally.locateFilePath('/path1/path2/resource', null, opts);
+        let path = serveLocally.locateFilePath('/path1/path2/resource', null, opts.root);
         expect(path).to.be.equal('test/test_dirs/path1/path2/resource.json');
     });
 
@@ -27,7 +27,7 @@ describe('serveLocally()', () => {
 
     it('should handle query params', () => {
         let opts = {root: './test/test_dirs'};
-        let path = serveLocally.locateFilePath('/path1/path2/resource', {'foo': 'bar'}, opts);
+        let path = serveLocally.locateFilePath('/path1/path2/resource', {'foo': 'bar'}, opts.root);
         expect(path).to.be.equal('test/test_dirs/path1/path2/resource?foo=bar.json');
     });
 });
