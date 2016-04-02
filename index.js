@@ -68,7 +68,7 @@ function serveLocally(opts) {
     if (typeof opts.logger == 'function') {
         logger = opts.logger;
     } else if (opts.logger == true) {
-        logger = console.logj
+        logger = console.log
     }
 
     let root = '.';
